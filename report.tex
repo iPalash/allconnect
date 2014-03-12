@@ -1,0 +1,40 @@
+\documentclass[10pt]{article}
+\usepackage[margin=0.5in]{geometry}
+\usepackage{mathtools}
+
+
+\begin{document}
+
+\title{CSL333 Homework 2}
+\author{\textsc{Kunal Singhal 2012cs10231 } \\  \textsc{ Swapnil Palash 2012cs10257}}
+\date{\today}
+\maketitle
+
+\section{Broad Idea} MinMax with Alpha-Beta Pruning and Cut-off.
+
+\section{Brief description}
+\begin{itemize}
+\item Running a MinMax with just Alpha Beta Pruning isn't feasible on 8x9 AllConnect Game, so a depth limited approach is adopted with depth being decide on the time left for the player at each move.
+\item The evaluation function uses multiple features, with weights being assigned to them on the basis of intuition and statistical test on playing with other players.
+\item The features include:
+\begin{itemize}
+\item The difference between the k-length sequences of the bot and the opponent's.
+\item The difference between the unobstructed (k-1)-length sequences of the bot and the opponent's.
+\item The difference between the unobstructed-from-both-side (k-1)-length sequences of the bot and the opponent's.
+\end{itemize}
+\item Also, the Player essentially has three modes, Attack,defense and Neutral. At the start, it plays aggresively, turns neutral in the middle and at the end plays defensively. 
+\end{itemize}
+
+\section{Implementational Details} 
+\begin{itemize}
+\item The MinMax is implemented in a recursive way with its depth being controlled by a logarithmic function, which is again dependent on the time left for the bot.
+\item The Bot Play-mode is implemented by giving weights to the difference in the features of the bot and the opponent's sequences.
+\end{itemize}
+\section{Running Time}
+\begin{itemize}
+\item Random Restart = $O(B\cdot R)$
+\item One iteration of beam search = $O(B^2 + min(B,R,C)\cdot B \cdot R)$
+\end{itemize}
+\section{Why This?}
+We tried including more features like unobstructed (k-2),(k-2) length sequences but they deteriorated the performance of the player. So,we stuck with the configuration that is presented before you.
+\end{document}
